@@ -1,0 +1,175 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2200" height="940" viewBox="0 0 2200 940" role="img" aria-labelledby="title desc">
+  <title id="title">MediaPipe Vision Studio Horizontal Architecture Diagram</title>
+  <desc id="desc">A clean horizontal architecture diagram for MediaPipe Vision Studio showing user input, Streamlit app, upload or camera input, RGB conversion, selected task routing, MediaPipe processing, annotation, merge output, and final display.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto">
+      <path d="M0,0 L10,5 L0,10 Z" fill="#263238"/>
+    </marker>
+    <filter id="shadow" x="-10%" y="-15%" width="120%" height="140%">
+      <feDropShadow dx="0" dy="4" stdDeviation="4" flood-color="#0f172a" flood-opacity="0.13"/>
+    </filter>
+    <style>
+      .canvas { fill: #f8fafc; }
+      .title { font: 700 36px Arial, Helvetica, sans-serif; fill: #0f172a; text-anchor: middle; }
+      .subtitle { font: 400 18px Arial, Helvetica, sans-serif; fill: #475569; text-anchor: middle; }
+      .stage-title { font: 700 14px Arial, Helvetica, sans-serif; fill: #64748b; text-anchor: middle; letter-spacing: .7px; }
+      .box { stroke-width: 2.2; rx: 14; filter: url(#shadow); }
+      .box-main { fill: #e0f2fe; stroke: #0284c7; }
+      .box-ui { fill: #dcfce7; stroke: #16a34a; }
+      .box-convert { fill: #ffedd5; stroke: #ea580c; }
+      .box-decision { fill: #fef9c3; stroke: #ca8a04; }
+      .box-task { fill: #ede9fe; stroke: #7c3aed; }
+      .box-engine { fill: #fee2e2; stroke: #dc2626; }
+      .box-output { fill: #e2e8f0; stroke: #475569; }
+      .label { font: 700 20px Arial, Helvetica, sans-serif; fill: #0f172a; text-anchor: middle; }
+      .small { font: 400 15px Arial, Helvetica, sans-serif; fill: #334155; text-anchor: middle; }
+      .line { fill: none; stroke: #263238; stroke-width: 2.5; marker-end: url(#arrow); }
+      .branch { fill: none; stroke: #475569; stroke-width: 2.2; marker-end: url(#arrow); }
+      .join { fill: none; stroke: #64748b; stroke-width: 2.2; marker-end: url(#arrow); }
+      .lane-label-bg { fill: #ffffff; stroke: #cbd5e1; stroke-width: 1; rx: 8; }
+      .lane-text { font: 700 14px Arial, Helvetica, sans-serif; fill: #334155; text-anchor: middle; }
+      .note { font: 400 15px Arial, Helvetica, sans-serif; fill: #334155; text-anchor: middle; }
+    </style>
+  </defs>
+
+  <rect class="canvas" width="2200" height="940"/>
+
+  <text x="1100" y="58" class="title">MediaPipe Vision Studio Architecture</text>
+  <text x="1100" y="90" class="subtitle">Input is converted to an RGB image, one selected task runs, and the processed image plus message is displayed.</text>
+
+  <text x="120" y="136" class="stage-title">USER</text>
+  <text x="350" y="136" class="stage-title">INTERFACE</text>
+  <text x="590" y="136" class="stage-title">INPUT METHOD</text>
+  <text x="825" y="136" class="stage-title">IMAGE DATA</text>
+  <text x="1065" y="136" class="stage-title">ROUTER</text>
+  <text x="1335" y="136" class="stage-title">VISION TASK</text>
+  <text x="1590" y="136" class="stage-title">PROCESSING</text>
+  <text x="1845" y="136" class="stage-title">MERGE</text>
+  <text x="2065" y="136" class="stage-title">OUTPUT</text>
+
+  <!-- Input side -->
+  <rect x="40" y="190" width="160" height="82" class="box box-main"/>
+  <text x="120" y="224" class="label">User</text>
+  <text x="120" y="248" class="small">Browser</text>
+
+  <rect x="255" y="190" width="190" height="82" class="box box-ui"/>
+  <text x="350" y="224" class="label">Streamlit UI</text>
+  <text x="350" y="248" class="small">app.py</text>
+
+  <rect x="500" y="160" width="180" height="70" class="box box-ui"/>
+  <text x="590" y="189" class="label">Upload Image</text>
+  <text x="590" y="211" class="small">JPG / PNG</text>
+
+  <rect x="500" y="280" width="180" height="70" class="box box-ui"/>
+  <text x="590" y="309" class="label">Camera</text>
+  <text x="590" y="331" class="small">Snapshot</text>
+
+  <rect x="745" y="220" width="160" height="82" class="box box-convert"/>
+  <text x="825" y="251" class="label">RGB Image</text>
+  <text x="825" y="275" class="small">NumPy array</text>
+
+  <rect x="970" y="220" width="190" height="82" class="box box-decision"/>
+  <text x="1065" y="249" class="label">Selected Task</text>
+  <text x="1065" y="273" class="label">Router</text>
+
+  <path class="line" d="M200 231 H255"/>
+  <path class="branch" d="M445 231 H470 V195 H500"/>
+  <path class="branch" d="M445 231 H470 V315 H500"/>
+  <path class="branch" d="M680 195 H715 V245 H745"/>
+  <path class="branch" d="M680 315 H715 V277 H745"/>
+  <path class="line" d="M905 261 H970"/>
+
+  <!-- Task lanes -->
+  <rect x="1205" y="345" width="230" height="68" class="box box-task"/>
+  <text x="1320" y="373" class="label">MediaPipe Face</text>
+  <text x="1320" y="395" class="small">Detect face boxes</text>
+
+  <rect x="1205" y="455" width="230" height="68" class="box box-task"/>
+  <text x="1320" y="483" class="label">MediaPipe Hands</text>
+  <text x="1320" y="505" class="small">21 hand landmarks</text>
+
+  <rect x="1205" y="565" width="230" height="68" class="box box-task"/>
+  <text x="1320" y="593" class="label">Hands + Rules</text>
+  <text x="1320" y="615" class="small">Finger states</text>
+
+  <rect x="1205" y="675" width="230" height="68" class="box box-task"/>
+  <text x="1320" y="703" class="label">MediaPipe Pose</text>
+  <text x="1320" y="725" class="small">Body landmarks</text>
+
+  <rect x="1205" y="785" width="230" height="68" class="box box-task"/>
+  <text x="1320" y="813" class="label">Selfie Segmentation</text>
+  <text x="1320" y="835" class="small">Person mask</text>
+
+  <rect x="1490" y="345" width="210" height="68" class="box box-engine"/>
+  <text x="1595" y="373" class="label">OpenCV</text>
+  <text x="1595" y="395" class="small">Draw bounding boxes</text>
+
+  <rect x="1490" y="455" width="210" height="68" class="box box-engine"/>
+  <text x="1595" y="483" class="label">Drawing Utils</text>
+  <text x="1595" y="505" class="small">Draw landmarks</text>
+
+  <rect x="1490" y="565" width="210" height="68" class="box box-engine"/>
+  <text x="1595" y="593" class="label">Label Gesture</text>
+  <text x="1595" y="615" class="small">Fist / Palm / Peace</text>
+
+  <rect x="1490" y="675" width="210" height="68" class="box box-engine"/>
+  <text x="1595" y="703" class="label">Drawing Utils</text>
+  <text x="1595" y="725" class="small">Draw skeleton</text>
+
+  <rect x="1490" y="785" width="210" height="68" class="box box-engine"/>
+  <text x="1595" y="813" class="label">Blur Background</text>
+  <text x="1595" y="835" class="small">Mask + Gaussian blur</text>
+
+  <!-- Branch labels kept clear of connector paths -->
+  <rect x="988" y="339" width="154" height="30" class="lane-label-bg"/>
+  <text x="1065" y="359" class="lane-text">Face Detection</text>
+
+  <rect x="983" y="449" width="164" height="30" class="lane-label-bg"/>
+  <text x="1065" y="469" class="lane-text">Hand Tracking</text>
+
+  <rect x="963" y="559" width="204" height="30" class="lane-label-bg"/>
+  <text x="1065" y="579" class="lane-text">Gesture Recognition</text>
+
+  <rect x="990" y="669" width="150" height="30" class="lane-label-bg"/>
+  <text x="1065" y="689" class="lane-text">Pose Detection</text>
+
+  <rect x="960" y="779" width="210" height="30" class="lane-label-bg"/>
+  <text x="1065" y="799" class="lane-text">Background Removal</text>
+
+  <!-- Selected-task router: one selected branch at a time -->
+  <rect x="1190" y="303" width="180" height="30" class="lane-label-bg"/>
+  <text x="1280" y="323" class="lane-text">one selected branch runs</text>
+  <path class="branch" d="M1160 261 H1182 V379 H1205"/>
+  <path class="branch" d="M1160 261 H1182 V489 H1205"/>
+  <path class="branch" d="M1160 261 H1182 V599 H1205"/>
+  <path class="branch" d="M1160 261 H1182 V709 H1205"/>
+  <path class="branch" d="M1160 261 H1182 V819 H1205"/>
+
+  <!-- Per-lane processing arrows -->
+  <path class="line" d="M1435 379 H1490"/>
+  <path class="line" d="M1435 489 H1490"/>
+  <path class="line" d="M1435 599 H1490"/>
+  <path class="line" d="M1435 709 H1490"/>
+  <path class="line" d="M1435 819 H1490"/>
+
+  <!-- Merge and final output -->
+  <rect x="1765" y="555" width="165" height="90" class="box box-output"/>
+  <text x="1848" y="587" class="label">Processed</text>
+  <text x="1848" y="611" class="label">Image +</text>
+  <text x="1848" y="635" class="label">Message</text>
+
+  <rect x="2000" y="559" width="165" height="82" class="box box-output"/>
+  <text x="2082" y="591" class="label">Display</text>
+  <text x="2082" y="615" class="small">Image + message</text>
+
+  <path class="join" d="M1700 379 H1735 V565 H1765"/>
+  <path class="join" d="M1700 489 H1748 V585 H1765"/>
+  <path class="join" d="M1700 599 H1765"/>
+  <path class="join" d="M1700 709 H1748 V620 H1765"/>
+  <path class="join" d="M1700 819 H1735 V640 H1765"/>
+  <path class="line" d="M1930 600 H2000"/>
+
+  <!-- Footer note -->
+  <rect x="72" y="885" width="2056" height="34" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5" rx="12"/>
+  <text x="1100" y="907" class="note">Each task receives the same RGB image input; the router sends the image to only the task selected by the user.</text>
+</svg>
