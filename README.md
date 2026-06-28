@@ -84,8 +84,8 @@ Uses selfie segmentation to separate the person from the background and blur the
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/YoussefEmad04/mediapipe_vision_studio.git
-cd mediapipe_vision_studio
+git clone https://github.com/YoussefEmad04/Mediapipe-Task.git
+cd Mediapipe-Task
 ```
 
 ---
